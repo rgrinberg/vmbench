@@ -18,6 +18,6 @@ http.createServer(function (req, res)
   res:setHeader("Content-Type", "text/plain")
   res:setHeader("Content-Length", msize)
   res:finish(responses[msize])
-end):listen(25000, '127.0.0.1')
+end):listen(25000, '0.0.0.0')
 
 print('Server running at http://127.0.0.1:25000/')

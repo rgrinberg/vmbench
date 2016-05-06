@@ -2,7 +2,7 @@ local uv = require('uv')
 
 -- Create listener socket
 local server = uv.new_tcp()
-server:bind('127.0.0.1', 25000)
+server:bind('0.0.0.0', 25000)
 
 server:listen(128, function(err)
   -- Create socket handle for client
