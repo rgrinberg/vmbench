@@ -30,6 +30,7 @@ server_base = ['docker', 'run', '--rm', '-t', '-p', '25000:25000',
 
 python = ['vex', 'bench', 'python']
 nodejs = ['nodejs']
+luvit = ['luvit']
 
 echo_client = ['./echo_client', '--output-format=json']
 
@@ -148,6 +149,12 @@ benchmarks = [{
     'server_address': unix_address,
     'client': unix_client,
 }, {
+    'name': 'tcpecho-luvit',
+    'title': 'TCP echo server (luvit)',
+    'server': luvit + ['/usr/src/servers/luvitecho.lua'],
+    'server_address': tcp_address,
+    'client': tcp_client,
+}, {
     'name': 'http-asyncio-aiohttp',
     'title': 'HTTP server (asyncio/aiohttp)',
     'server': python + ['/usr/src/servers/asyncio_http_server.py',
@@ -189,6 +196,12 @@ benchmarks = [{
     'name': 'http-golang',
     'title': 'HTTP server (golang)',
     'server': ['/usr/src/servers/gohttp'],
+    'server_address': tcp_address,
+    'client': http_client,
+}, {
+    'name': 'http-luvit',
+    'title': 'HTTP server (luvit)',
+    'server': luvit + ['/usr/src/servers/luvit_http_server.lua'],
     'server_address': tcp_address,
     'client': http_client,
 }]
