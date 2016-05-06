@@ -16,7 +16,7 @@ ENV GOPATH /usr/go/
 RUN DEBIAN_FRONTEND=noninteractive \
         apt-get update && apt-get install -y \
             autoconf automake libtool build-essential \
-            python3 python3-pip git nodejs golang gosu
+            python3 python3-pip git nodejs golang gosu curl
 
 RUN pip3 install vex
 RUN vex --python=python3.5 -m bench pip install -U pip
@@ -29,6 +29,10 @@ RUN vex bench pip --cache-dir=/var/lib/cache/pip \
         install -r /usr/src/servers/requirements.txt
 
 RUN vex bench pip freeze -r /usr/src/servers/requirements.txt
+
+RUN curl -L https://github.com/luvit/lit/raw/master/get-lit.sh | sh
+RUN ./lit make lit://luvit/luvit
+RUN install -t /usr/bin -m 0755 ./luvit
 
 EXPOSE 25000
 
